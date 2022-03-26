@@ -1,0 +1,22 @@
+{
+  "name": "learnjs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hvgithub/learnjs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hvgithub/learnjs/issues"
+  },
+  "homepage": "https://github.com/hvgithub/learnjs#readme",
+  "devDependencies": {
+    "jest": "^27.5.1"
+  }
+}
