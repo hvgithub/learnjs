@@ -7,31 +7,9 @@ class DoubleLinkedList {
         this.length = null;
     }
 
-    insertAtHead_ll (data) {
-        let currentNode = this.head;
-        let newNode = new LinkedList(data, currentNode);
-        this.head = newNode;
-    }
-
     insertAtHead (data) {
-        let current = this.head;
-        let prevNode = null;
-        let nextNode = current;
-        let last = this.tail;
-
-        if (this.head == null) {
-            prevNode = null;
-            nextNode = null;
-        } else {
-            prevNode = current.prev;
-            nextNode = current.next;
+        if (!this.head) {
         }
-
-        let newNode = new DoubleLinkedListNode(data, null, current);
-        this.head = newNode;
-        //newNode.next = current;
-        this.tail = last;
-
         this.length++;
     }
     print () {
@@ -48,11 +26,11 @@ class DoubleLinkedList {
         let current = this.tail;
         let output = "";
         while (current !== null) {
-            output = `${output}${current.data}->`;
+            output = `${output}<-${current.data}`;
             current = current.prev;
         }
-        output = `${output}null${this.length}`;
-        console.log(output);
+        output = `null${output}`;
+        console.log(`${output}`);
     }
 }
 
@@ -65,15 +43,25 @@ class DoubleLinkedListNode {
 }
 
 let dll = new DoubleLinkedList();
+console.log(dll);
+exit();
 dll.print();
+dll.printFromTail();
 dll.insertAtHead("10");
 dll.print();
+dll.printFromTail();
+
 dll.insertAtHead("20");
 dll.print();
+dll.printFromTail();
+
 dll.insertAtHead("30");
 dll.print();
+dll.printFromTail();
 
 dll.insertAtHead("40");
 dll.print();
+dll.printFromTail();
+
 console.log("-------");
 dll.printFromTail();
