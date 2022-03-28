@@ -10,21 +10,8 @@ const islandCount = grid => {
     let count = 0;
     for (let r = 0; r < grid.length; r++) {
         for (let c = 0; c < grid[0].length; c++) {
-            let landUnits = explore(
-                grid,
-                r,
-                c,
-                visited,
-                (count = 0),
-                visistedLandSet,
-                visistedLandMapRow,
-                visistedLandMapCol
-            );
-
-            if (landUnits > 0) {
-                console.log("landUnits=", landUnits);
-                visistedLandUnits.set(count, landUnits);
-                count = count + 1;
+            if (explore(grid, r, c, visited)) {
+                count++;
             }
         }
     }
@@ -34,29 +21,17 @@ const islandCount = grid => {
     console.log(
         "Land Map=",
         visistedLandMapRow,
-       
+        visistedLandUnits,
         visistedLandMapCol,
         visistedLandUnits
     );
 	*/
     //  console.log("Land Map=", visistedLandUnits);
 
-    console.log("Land Units=", visistedLandUnits);
-
     return count;
 };
 
-const explore = (
-    grid,
-    r,
-    c,
-    visited,
-    count = 0,
-    visistedLandSet,
-
-    visistedLandMapRow,
-    visistedLandMapCol
-) => {
+const explore = (grid, r, c, visited) => {
     const rowInbouund = 0 <= r && r < grid.length;
     const colInbouund = 0 <= c && c < grid[0].length;
     if (!rowInbouund || !colInbouund) return false;
@@ -67,69 +42,17 @@ const explore = (
     visited.add(pos);
     if (grid[r][c] !== "L") {
         return false;
-    } else {
-        // console.log("-->", grid, r, c, "count=", count, "<--\n");
-        count++;
-        visistedLandSet.add(pos);
-        if (!visistedLandMapRow.has(r)) {
-            visistedLandMapRow.set(r, []);
-        }
-        visistedLandMapRow.set(r, [...visistedLandMapRow.get(r), pos]);
-        if (!visistedLandMapCol.has(c)) {
-            visistedLandMapCol.set(c, []);
-        }
-        visistedLandMapCol.set(c, [...visistedLandMapCol.get(c), pos]);
     }
 
-    explore(
-        grid,
-        r - 1,
-        c,
-        visited,
-        count,
-        visistedLandSet,
+    explore(grid, r - 1, c, visited);
 
-        visistedLandMapRow,
-        visistedLandMapCol
-    );
+    explore(grid, r + 1, c, visited);
 
-    explore(
-        grid,
-        r + 1,
-        c,
-        visited,
-        count,
-        visistedLandSet,
+    explore(grid, r, c - 1, visited);
 
-        visistedLandMapRow,
-        visistedLandMapCol
-    );
+    explore(grid, r, c + 1, visited);
 
-    explore(
-        grid,
-        r,
-        c - 1,
-        visited,
-        count,
-        visistedLandSet,
-
-        visistedLandMapRow,
-        visistedLandMapCol
-    );
-
-    explore(
-        grid,
-        r,
-        c + 1,
-        visited,
-        count,
-        visistedLandSet,
-
-        visistedLandMapRow,
-        visistedLandMapCol
-    );
-
-    return count;
+    return true;
 };
 
 let grid = [
