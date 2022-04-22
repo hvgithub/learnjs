@@ -18,5 +18,9 @@
   "homepage": "https://github.com/hvgithub/learnjs#readme",
   "devDependencies": {
     "jest": "^27.5.1"
+  },
+  "dependencies": {
+    "live-server": "^1.1.0",
+    "ws": "^8.5.0"
   }
 }

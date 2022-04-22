@@ -15,4 +15,40 @@ const incomeTax = (income, lowerLimits, taxRate) => {
     return taxAmt;
 };
 
-console.log(incomeTax(income, lowerLimits, taxRates));
+// console.log(incomeTax(income, lowerLimits, taxRates));
+
+const logs = ["88 89 300", "89 88 300", "88 88 200", "88 88 300"];
+
+function logTrans (logs, treshold) {
+    let newlog = [];
+    logs.map(item => {
+        let a = item.split(" ");
+        if (a[2] >= 300) {
+            newlog.push(a[0], a[1]);
+        }
+    });
+
+    let newmap = newlog.reduce(
+        (acc, item) => ({
+            ...acc,
+            [item]: acc[item] ? acc[item] + 1 : 1
+        }),
+        {}
+    );
+
+    console.log(Object.keys(newmap).sort());
+}
+
+console.log(logTrans(logs));
+
+function entriesCount (arr) {
+    return arr.reduce(
+        (acc, item) => ({
+            ...acc,
+            [item]: acc[item] ? acc[item] + 1 : 1
+        }),
+        {}
+    );
+}
+
+console.log(entriesCount(["a", "b", "c", "b"]));

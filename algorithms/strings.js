@@ -168,5 +168,120 @@ function dupes (words = "Hello world hello") {
 }
 
 //dupes();
+const base62 = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
-function bitly () {}
+function base62_encode (base10) {
+    let encoded = "";
+    while (base10 > 0) {
+        encoded = base62[base10 % 62] + encoded;
+        base10 = Math.floor(base10 / 62);
+        console.log(`Math.floor(base10 / 62)=${Math.floor(base10 / 62)}`);
+    }
+    return encoded;
+}
+
+//console.log("bsae62=", base62_encode(1000));
+
+function base62_getIndex (item) {
+    return base62.split("").indexOf(item);
+}
+
+function base62_decode (val62) {
+    let newarr = val62.split("");
+    console.log(newarr.length);
+    let decode = 0;
+    let count = 0;
+    for (let i = newarr.length - 1; i >= 0; i--) {
+        let pos = base62_getIndex(newarr[i]);
+        console.log("pos", pos);
+        decode = decode + Math.pow(62, count) * pos;
+        console.log(
+            `i=${i},decode=${decode} count=${count} (62 ^ count)=${Math.exp(
+                62,
+                count
+            )} * pos=${pos}`
+        );
+
+        count++;
+    }
+    return decode;
+}
+
+//console.log("Decoded val=", base62_decode("qi"));
+
+function intToStringArr () {
+    let a = 1234567;
+    let newStrArr = Array.from(String(a), item => Number(item));
+
+    console.log("result=", newStrArr);
+
+    let newArr2 = String(a).split("");
+    //    .map(num => Number(num));
+    console.log("newArr2=", newArr2);
+}
+
+function numToString (num) {
+    let arrStr = Array.from(String(num), n => Number(n));
+
+    arrStr = String(num).localeCompare("12");
+    return arrStr;
+}
+
+console.log(numToString(123456));
+
+function compStr (word, checkana) {
+    let wordMap = word.split("").reduce(
+        (acc, letter) => ({
+            ...acc,
+            [letter]: acc[letter] ? acc[letter] + 1 : 1
+        }),
+        {}
+    );
+
+    let checkanaMap = checkana.split("").reduce(
+        (acc, letter) => ({
+            ...acc,
+            [letter]: acc[letter] ? acc[letter] + 1 : 1
+        }),
+        {}
+    );
+
+    console.log(
+        Object.keys(wordMap).every(item => {
+            if (wordMap[item] === checkanaMap[item]) {
+                return true;
+            } else {
+                false;
+            }
+        })
+    );
+}
+
+//console.log(compStr("hello", "ollhe"));
+
+//Find is a substr is present in the str
+function longestSubStr (str, substr) {
+    const strLength = str.length;
+    const substrLength = substr.length;
+    let j = 0;
+    let strCheckLength = 0;
+    let foundsubstr = "";
+    for (let i = 0; i < str.length; i++) {
+        if (str[i] === substr[j]) {
+            console.log(str[i], substr[j]);
+
+            strCheckLength++;
+            foundsubstr = foundsubstr + substr[j];
+            if (strCheckLength == substrLength) {
+                console.log("Found substr", foundsubstr);
+                return true;
+            }
+            j++;
+        } else {
+            foundsubstr = "";
+            strCheckLength = 0;
+        }
+    }
+}
+
+console.log(longestSubStr("helloworld", "world"));
