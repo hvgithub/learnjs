@@ -1,0 +1,44 @@
+/* * {
+    box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+} */
+#game {
+    width: 400px;
+    height: 500px;
+    border: 1px solid black;
+    margin: auto;
+}
+
+#character {
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    border-radius: 50%;
+    position: relative;
+    z-index: 100;
+    top: 400px;
+    left: 190px;
+}
+
+.block {
+    position: relative;
+    width: 400px;
+    height: 20px;
+    background-color: black;
+    top: 100px;
+    margin-top: -20px;
+}
+
+.hole {
+    position: relative;
+    width: 40px;
+    height: 20px;
+    background-color: white;
+    top: 100px;
+    margin-top: -20px;
+}
